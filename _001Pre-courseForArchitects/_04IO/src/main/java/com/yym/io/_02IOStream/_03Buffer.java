@@ -33,10 +33,10 @@ public class _03Buffer {
             byte[] readByte = new byte[1022 * 2];
             int len = 0;
             while ((len = bis.read(readByte)) != -1) {
-                System.out.println(new String(readByte, 0, len));
+                log.info("文件数据: {}", new String(readByte, 0, len));
             }
         } catch (IOException ex) {
-            log.info(ex.getMessage());
+            log.error("字节缓冲流异常: ", ex);
         }
     }
 
@@ -60,9 +60,9 @@ public class _03Buffer {
                 builder.append(line);
                 builder.append(System.lineSeparator());
             }
-            System.out.println(builder.toString());
+            log.info("文件数据: {}", builder);
         } catch (IOException ex) {
-            log.info(ex.getMessage());
+            log.error("字符缓冲流异常: ", ex);
         }
     }
 
