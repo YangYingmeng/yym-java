@@ -14,12 +14,15 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2023-06-11 19:26
  */
 @Configuration      // 标识组件
-@ConditionalOnClass(WhiteListProperties.class)      // 只有当WhiteListProperties在当前类路径上, 才会实例化一个类
-@EnableConfigurationProperties(WhiteListProperties.class)   // 使配置类生效
+// 只有当WhiteListProperties在当前类路径上, 才会实例化一个类
+// ConditionalOnClass/Bean/Expression/MissingBean/MissingClass
+@ConditionalOnClass(WhiteListProperties.class)
+@EnableConfigurationProperties(WhiteListProperties.class)   // 使配置类生效, 将配置类交给spring管理
 public class WhiteListAutoConfigure {
 
+    // 将配置类注入
     @Bean("whiteListConfig")
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean   // 只会实例化一个该Bean对象
     public String whiteListConfig(WhiteListProperties whiteListProperties) {
         return whiteListProperties.getUsers();
     }

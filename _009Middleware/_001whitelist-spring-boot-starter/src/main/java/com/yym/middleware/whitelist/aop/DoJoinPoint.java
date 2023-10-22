@@ -1,11 +1,9 @@
-package com.yym.middleware.whitelist;
+package com.yym.middleware.whitelist.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.yym.middleware.whitelist.annotation.DoWhiteList;
-import com.yym.middleware.whitelist.config.WhiteListProperties;
 import org.apache.commons.beanutils.BeanUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -32,14 +30,16 @@ public class DoJoinPoint {
     @Resource
     private String whiteListConfig;
 
+    // 自定义切点, 切点为自定义注解使用的地方
     @Pointcut("@annotation(com.yym.middleware.whitelist.annotation.DoWhiteList)")
     public void addPoint() {
 
     }
 
+    // 织入动作, 调用自定义注解时会增强该方法
     @Around("addPoint()")
     public Object doRouter(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 获取自定义注解, 自定义注解是在方法上使用
+        // 获取自定义注解, 自定义注解是在方法上使用; 获取到方法就可以获取到自定义注解
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         DoWhiteList whiteList = method.getAnnotation(DoWhiteList.class);
@@ -87,7 +87,7 @@ public class DoJoinPoint {
 
 
     /**
-     * @Description: 返回对象
+     * @Description: 拦截时, 构造原方法对象进行返回
      * @Param: DoWhiteList 配置类
      * @Param: Method 方法
      * @Return: Object

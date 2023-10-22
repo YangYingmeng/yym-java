@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * @Version: 1.0
  * @Date: 2023-06-11 19:14
  */
-@Retention(RetentionPolicy.RUNTIME)     // 元注解
+@Retention(RetentionPolicy.RUNTIME)     // 元注解, 加了该注解可以通过反射拿到注解信息
 @Target(ElementType.METHOD)             // 元注解 自定义注解用在什么地方
 @Inherited
 public @interface DoWhiteList {
