@@ -3,3 +3,8 @@ server:
 spring:
   application:
     name: spring-boot-demo
+
+# 白名单用户
+yym:
+  whitelist:
+    users: aaa,111

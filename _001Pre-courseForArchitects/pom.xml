@@ -13,6 +13,8 @@
         <module>_02lambdaAndStream</module>
         <module>_03Proxy</module>
         <module>_04IO</module>
+        <module>_05basicGrammar</module>
+        <module>_06collection</module>
     </modules>
 
     <properties>

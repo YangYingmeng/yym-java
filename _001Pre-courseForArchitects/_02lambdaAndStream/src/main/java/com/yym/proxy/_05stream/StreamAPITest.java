@@ -64,7 +64,10 @@ public class StreamAPITest {
     // 排序
     private static void sort() {
         ArrayList<User> users = getUsers();
+        // 升序排序
         users.stream().sorted(Comparator.comparingInt(User::getAge)).forEach(System.out::println);
+        // 降序排序
+        users.stream().sorted(Comparator.comparingInt(User::getAge).reversed()).forEach(System.out::println);
     }
 
     private static ArrayList<User> getUsers() {

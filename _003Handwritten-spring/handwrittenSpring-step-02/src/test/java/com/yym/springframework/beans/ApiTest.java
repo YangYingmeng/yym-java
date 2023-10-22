@@ -27,4 +27,25 @@ public class ApiTest {
         UserService userService1 = (UserService) beanFactory.getBean("userService");
         userService1.queryUserInfo();
     }
+
+    /**
+     * @Description:
+     *      先从单例池中获取bean,
+     *          1. 获取到直接返回
+     *          2. 单例池获取不到, 从beanDefinitionMap中获取beanDefinition, 通过beanDefinition创建bean, add进单例池
+     */
+    @Test
+    public void test1() {
+        // 1. 初始化容器
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        // 2. 初始化beanDefinition
+        BeanDefinition beanDefinition = new BeanDefinition(UserService.class);
+        // 3. 注册beanDefinition
+        beanFactory.registerBeanDefinition("userService", beanDefinition);
+        // 4. 首次获取bean, create
+        beanFactory.getBean("userService");
+        // 5. 第二次获取bean, 直接get
+        beanFactory.getBean("userService");
+
+    }
 }

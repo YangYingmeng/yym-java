@@ -3,6 +3,8 @@ package com.yym.proxy;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @Description: 代理类
@@ -15,6 +17,8 @@ public class YymProxy {
     Person yym = new Yym();
 
     public Person getProxy() {
+        HashMap<String, String> stringStringHashMap = new HashMap<>();
+        stringStringHashMap.put("1", "1");
         return (Person) Proxy.newProxyInstance(this.getClass().getClassLoader(), yym.getClass().getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

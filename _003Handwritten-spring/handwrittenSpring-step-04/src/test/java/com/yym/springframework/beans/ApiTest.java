@@ -31,4 +31,18 @@ public class ApiTest {
         UserService userService = (UserService) beanFactory.getBean("userService");
         userService.queryInfo();
     }
+
+    @Test
+    public void test1() {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        beanFactory.registerBeanDefinition("userDao", new BeanDefinition(UserDao.class));
+
+        PropertyValues propertyValues = new PropertyValues();
+        propertyValues.addPropertyValue(new PropertyValue("userId", "1"));
+        propertyValues.addPropertyValue(new PropertyValue("userDao", new BeanReference("userDao")));
+        beanFactory.registerBeanDefinition("userService", new BeanDefinition(UserService.class, propertyValues));
+
+        UserService userService = (UserService) beanFactory.getBean("userService");
+        userService.queryInfo();
+    }
 }

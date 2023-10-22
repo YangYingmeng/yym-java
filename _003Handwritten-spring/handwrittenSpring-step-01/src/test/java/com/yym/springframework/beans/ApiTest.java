@@ -17,13 +17,12 @@ public class ApiTest {
         // 1. 初始化beanFactory
         BeanFactory beanFactory = new BeanFactory();
 
-        // 2. 注入bean, 此处bean的实例化是通过构造函数的参数形式传递, 把bean实例化的信息也传入beanFactory
-        //    我们需要的是只将bean的类信息注册到beanFactory中
-        BeanDefinition beanDefinition = new BeanDefinition(new UserService());
-        beanFactory.registerBeanDefinition("userService", beanDefinition);
+        // 2. 加载beanDefinition
+        UserService userService = new UserService();
+        beanFactory.registerBeanDefinition("userService", new BeanDefinition(userService));
 
-        // 获取bean
-        UserService userService = (UserService) beanFactory.getBean("userService");
-        userService.queryUserInfo();
+        // 3. 获取bean, 调用方法
+        UserService bean = (UserService) beanFactory.getBean("userService");
+        bean.queryUserInfo();
     }
 }
